@@ -26,14 +26,14 @@ steps:
   displayName: 'Restore NuGet packages'
   inputs:
     command: 'restore'
-    projects: 'src/*.csproj'
+    projects: 'src/AzDoAgentScaler.csproj'
 
 # Build project in Release mode
 - task: DotNetCoreCLI@2
   displayName: 'Build project'
   inputs:
     command: 'build'
-    projects: 'src/*.csproj'
+    projects: 'src/AzDoAgentScaler.csproj'
     arguments: '-c Release'
 
 # Publish for Windows (win-x64)
@@ -41,7 +41,7 @@ steps:
   displayName: 'Publish for Windows (win-x64)'
   inputs:
     command: 'publish'
-    projects: 'src/*.csproj'
+    projects: 'src/AzDoAgentScaler.csproj'
     arguments: > 
       -c Release
       -p:PublishSingleFile=true
@@ -58,7 +58,7 @@ steps:
   displayName: 'Publish for Linux (linux-x64)'
   inputs:
     command: 'publish'
-    projects: 'src/*.csproj'
+    projects: 'src/AzDoAgentScaler.csproj'
     arguments: > 
       -c Release
       -p:PublishSingleFile=true
@@ -75,7 +75,7 @@ steps:
   displayName: 'Publish for macOS (osx-x64)'
   inputs:
     command: 'publish'
-    projects: 'src/*.csproj'
+    projects: 'src/AzDoAgentScaler.csproj'
     arguments: > 
       -c Release
       -p:PublishSingleFile=true
