@@ -41,7 +41,7 @@ steps:
   displayName: 'Publish for Windows (win-x64)'
   inputs:
     command: 'publish'
-    projects: 'src/AzDoAgentScaler.csproj'
+    projects: 'AzDoAgentScaler.csproj'
     arguments: > 
       -c Release
       -p:PublishSingleFile=true
@@ -52,13 +52,14 @@ steps:
       -p:InformationalVersion=$(Build.SourceBranchName)-$(Build.BuildId)
       -r win-x64
       -o $(Build.ArtifactStagingDirectory)/win-x64
+    workingDirectory: 'src'
 
 # Publish for Linux (linux-x64)
 - task: DotNetCoreCLI@2
   displayName: 'Publish for Linux (linux-x64)'
   inputs:
     command: 'publish'
-    projects: 'src/AzDoAgentScaler.csproj'
+    projects: 'AzDoAgentScaler.csproj'
     arguments: > 
       -c Release
       -p:PublishSingleFile=true
@@ -69,13 +70,14 @@ steps:
       -p:InformationalVersion=$(Build.SourceBranchName)-$(Build.BuildId)
       -r linux-x64
       -o $(Build.ArtifactStagingDirectory)/linux-x64
+    workingDirectory: 'src'
 
 # Publish for macOS (osx-x64)
 - task: DotNetCoreCLI@2
   displayName: 'Publish for macOS (osx-x64)'
   inputs:
     command: 'publish'
-    projects: 'src/AzDoAgentScaler.csproj'
+    projects: 'AzDoAgentScaler.csproj'
     arguments: > 
       -c Release
       -p:PublishSingleFile=true
@@ -86,6 +88,7 @@ steps:
       -p:InformationalVersion=$(Build.SourceBranchName)-$(Build.BuildId)
       -r osx-x64
       -o $(Build.ArtifactStagingDirectory)/osx-x64
+    workingDirectory: 'src'
 
 # Publish all artifacts
 - task: PublishBuildArtifacts@1
