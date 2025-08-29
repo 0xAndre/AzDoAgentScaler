@@ -21,6 +21,12 @@ name: $(major).$(minor).$(patch)$(Rev:.r)
 
 steps:
 
+- task: UseDotNet@2
+  displayName: 'Install .NET 9 SDK'
+  inputs:
+    packageType: 'sdk'
+    version: '9.x'
+
 # Restore NuGet packages
 - task: DotNetCoreCLI@2
   displayName: 'Restore NuGet packages'
@@ -42,6 +48,7 @@ steps:
   inputs:
     command: 'publish'
     projects: '$(Build.SourcesDirectory)/src/AzDoAgentScaler.csproj'
+    publishWebProjects: false
     arguments: > 
       -c Release
       -p:PublishSingleFile=true
@@ -59,6 +66,7 @@ steps:
   inputs:
     command: 'publish'
     projects: '$(Build.SourcesDirectory)/src/AzDoAgentScaler.csproj'
+    publishWebProjects: false
     arguments: > 
       -c Release
       -p:PublishSingleFile=true
@@ -76,6 +84,7 @@ steps:
   inputs:
     command: 'publish'
     projects: '$(Build.SourcesDirectory)/src/AzDoAgentScaler.csproj'
+    publishWebProjects: false
     arguments: > 
       -c Release
       -p:PublishSingleFile=true
