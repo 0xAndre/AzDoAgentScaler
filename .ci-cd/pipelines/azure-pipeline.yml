@@ -13,9 +13,7 @@ variables:
   major: 1
   minor: 0
   patch: 0
-  buildversion: $(Build.BuildId)
   version: $(major).$(minor).$(patch)
-  assemblyVersion: $(major).$(minor).$(patch)
 
 name: $(major).$(minor).$(patch)$(Rev:.r)
 
@@ -55,9 +53,9 @@ steps:
       -p:PublishSingleFile=true
       -p:SelfContained=true
       -p:Version=$(version)
-      -p:FileVersion=$(buildversion)
-      -p:AssemblyVersion=$(assemblyVersion)
-      -p:InformationalVersion=$(Build.SourceBranchName)-$(Build.BuildId)
+      -p:FileVersion=$(Build.BuildNumber)
+      -p:AssemblyVersion=$(version)
+      -p:InformationalVersion=$(Build.SourceBranchName)-$(Build.BuildNumber)
       -r win-x64
       -o $(Build.ArtifactStagingDirectory)/win-x64
 
@@ -74,9 +72,9 @@ steps:
       -p:PublishSingleFile=true
       -p:SelfContained=true
       -p:Version=$(version)
-      -p:FileVersion=$(buildversion)
-      -p:AssemblyVersion=$(assemblyVersion)
-      -p:InformationalVersion=$(Build.SourceBranchName)-$(Build.BuildId)
+      -p:FileVersion=$(Build.BuildNumber)
+      -p:AssemblyVersion=$(version)
+      -p:InformationalVersion=$(Build.SourceBranchName)-$(Build.BuildNumber)
       -r linux-x64
       -o $(Build.ArtifactStagingDirectory)/linux-x64
 
@@ -93,9 +91,9 @@ steps:
       -p:PublishSingleFile=true
       -p:SelfContained=true
       -p:Version=$(version)
-      -p:FileVersion=$(buildversion)
-      -p:AssemblyVersion=$(assemblyVersion)
-      -p:InformationalVersion=$(Build.SourceBranchName)-$(Build.BuildId)
+      -p:FileVersion=$(Build.BuildNumber)
+      -p:AssemblyVersion=$(version)
+      -p:InformationalVersion=$(Build.SourceBranchName)-$(Build.BuildNumber)
       -r osx-x64
       -o $(Build.ArtifactStagingDirectory)/osx-x64
 
