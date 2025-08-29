@@ -1,14 +1,19 @@
 ﻿using System.CommandLine;
+using System.Diagnostics;
 using System.Reflection;
 using AzDoAgentScaler.Services;
 using AzDoAgentScaler.Services.Interfaces;
 using AzDoAgentScaler.Utils;
 
+string version = "unknown";
 
-var assembly = Assembly.GetExecutingAssembly();
-
-var version = assembly.GetCustomAttribute<AssemblyInformationalVersionAttribute>()?.InformationalVersion
-              ?? assembly.GetName().Version?.ToString();
+try
+{
+    var assembly = Assembly.GetExecutingAssembly();
+    var path = assembly.Location;
+    var fileVersionInfo = FileVersionInfo.GetVersionInfo(path);
+    version = fileVersionInfo.FileVersion;
+} catch { }
 
 Console.ForegroundColor = ConsoleColor.Cyan;
 Console.WriteLine(@"
