@@ -23,6 +23,10 @@ This tool only supports **Docker images hosted on Docker Hub**, making it compat
 - **Integrates with the Azure DevOps API** to monitor jobs, agent pools, and agent status in real-time.  
 - Supports **Docker Hub images only**, allowing the use of official or custom agent images published to Docker Hub.
 
+
+https://github.com/user-attachments/assets/7e607db5-68cf-4c56-bf10-c6da406930ff
+
+
 ## Requirements
 
 Before running **AzDoAgentScaler**, make sure you have the following:
