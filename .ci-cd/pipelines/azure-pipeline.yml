@@ -1,0 +1,64 @@
+trigger:
+  branches:
+    include:
+      - main
+  paths:
+    include:
+      - "src"
+
+pool:
+  vmImage: "windows-latest"
+
+variables:
+  major: 1
+  minor: 0
+  patch: 0
+  buildversion: $(Build.BuildId)
+  version: $(major).$(minor).$(patch)
+  assemblyVersion: $(major).$(minor).$(patch)
+  runtimes: win-x64;linux-x64;osx-x64
+
+name: $(major).$(minor).$(patch)$(Rev:.r)
+
+steps:
+
+# Restore NuGet packages
+- task: DotNetCoreCLI@2
+  displayName: 'Restore NuGet packages'
+  inputs:
+    command: 'restore'
+    projects: '**/*.csproj'
+
+# Build project in Release mode
+- task: DotNetCoreCLI@2
+  displayName: 'Build project'
+  inputs:
+    command: 'build'
+    projects: '**/*.csproj'
+    arguments: '-c Release'
+
+# Publish for each RuntimeIdentifier (Windows, Linux, macOS)
+- ${{ each rid in variables.runtimes.split(';') }}:
+  - task: DotNetCoreCLI@2
+    displayName: 'Publish for ${{ rid }}'
+    inputs:
+      command: 'publish'
+      projects: '**/*.csproj'
+      arguments: > 
+        -c Release
+        -p:PublishSingleFile=true
+        -p:SelfContained=true
+        -p:Version=$(version)
+        -p:FileVersion=$(buildversion)
+        -p:AssemblyVersion=$(assemblyVersion)
+        -p:InformationalVersion=$(Build.SourceBranchName)-$(Build.BuildId)
+        -r ${{ rid }}
+        -o $(Build.ArtifactStagingDirectory)/${{ rid }}
+
+# Publish artifacts for all three runtimes
+- task: PublishBuildArtifacts@1
+  displayName: 'Publish Artifacts for all Runtimes'
+  inputs:
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+    ArtifactName: 'PublishedExecutables'
+    publishLocation: 'Container'

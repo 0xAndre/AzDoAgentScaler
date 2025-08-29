@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "AzDoAgentScaler": {
+      "commandName": "Project",
+      "commandLineArgs": "--org primaverabss --pat 7hCLftoxs5y7K1FdxqU3f6pb1puowxJOEly2o41Tz3WnQioqxxMkJQQJ99BHACAAAAAh9hTbAAASAZDO2IfW --poolName andre"
+    }
+  }
+}
