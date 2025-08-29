@@ -55,7 +55,7 @@ steps:
       -p:Version=$(version)
       -p:FileVersion=$(Build.BuildNumber)
       -p:AssemblyVersion=$(version)
-      -p:InformationalVersion=$(Build.SourceBranchName)-$(version)
+      -p:InformationalVersion=$(version)
       -r win-x64
       -o $(Build.ArtifactStagingDirectory)/win-x64
 
@@ -74,7 +74,7 @@ steps:
       -p:Version=$(version)
       -p:FileVersion=$(Build.BuildNumber)
       -p:AssemblyVersion=$(version)
-      -p:InformationalVersion=$(Build.SourceBranchName)-$(version)
+      -p:InformationalVersion=$(version)
       -r linux-x64
       -o $(Build.ArtifactStagingDirectory)/linux-x64
 
@@ -93,7 +93,7 @@ steps:
       -p:Version=$(version)
       -p:FileVersion=$(Build.BuildNumber)
       -p:AssemblyVersion=$(version)
-      -p:InformationalVersion=$(Build.SourceBranchName)-$(version)
+      -p:InformationalVersion=$(version)
       -r osx-x64
       -o $(Build.ArtifactStagingDirectory)/osx-x64
 
